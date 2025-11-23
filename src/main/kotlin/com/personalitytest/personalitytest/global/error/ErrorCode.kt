@@ -6,7 +6,7 @@ enum class ErrorCode(
 ) {
     // Auth
     EMAIL_ALREADY_EXISTS(400, "이미 존재하는 이메일입니다."),
-    INVALID_LOGIN(400, "이메일 또는 비밀번호가 잘못되었습니다."),
+    INVALID_PASSWORD(400, "비밀번호가 잘못되었습니다."),
     UNAUTHORIZED(401, "인증 정보가 유효하지 않습니다."),
 
     // User

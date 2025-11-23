@@ -27,9 +27,9 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
-
+	implementation("io.github.cdimascio:java-dotenv:5.2.2")
 	// MySQL Driver
-	runtimeOnly("mysql:mysql-connector-j:8.1.0")
+	runtimeOnly("com.mysql:mysql-connector-j:8.1.0")
 
 	// JWT
 	implementation("io.jsonwebtoken:jjwt-api:0.11.5")

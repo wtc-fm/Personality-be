@@ -1,5 +1,6 @@
 package com.personalitytest.personalitytest.controller
 
+import com.personalitytest.personalitytest.dto.LoginRequest
 import com.personalitytest.personalitytest.dto.SignupRequest
 import com.personalitytest.personalitytest.service.AuthService
 import org.springframework.web.bind.annotation.PostMapping
@@ -15,4 +16,6 @@ class AuthController(
     @PostMapping("/signup")
     fun signup(@RequestBody req: SignupRequest) =
         authService.signup(req)
+    @PostMapping("/login")
+    fun login(@RequestBody req: LoginRequest) = authService.login(req)
 }
