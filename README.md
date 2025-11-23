@@ -12,41 +12,29 @@ React 프론트엔드와 연동되며, JWT 기반 인증 구조를 사용합니�
 
 ## flowchart TD
 
-%% ───────────────────────────────
-%% Styled Nodes
-%% ───────────────────────────────
-classDef page fill:#F7F9FC,stroke:#CBD5E1,stroke-width:1px,color:#1E293B,rx:8px,ry:8px;
-classDef action fill:#EEF2FF,stroke:#6366F1,stroke-width:1px,color:#1E1B4B,rx:8px,ry:8px;
-classDef result fill:#ECFDF5,stroke:#34D399,stroke-width:1px,color:#065F46,rx:8px,ry:8px;
-classDef error fill:#FEF2F2,stroke:#F87171,color:#7F1D1D,rx:8px,ry:8px;
+A[사용자 웹 접속] --> B[회원가입 페이지]
+B -->|회원가입 완료| C[로그인 페이지]
 
+C -->|이메일/비밀번호 입력| D[로그인 요청]
+D -->|JWT 토큰 발급| E[성격 테스트 시작]
 
-%% ───────────────────────────────
-%% Flow
-%% ───────────────────────────────
-A[사용자 웹 접속]:::page --> B[회원가입 페이지]:::page
-B -->|회원가입 완료| C[로그인 페이지]:::page
+E --> F[MBTI 질문 진행]
+F --> G[모든 질문 응답 완료]
 
-C -->|이메일/비밀번호 입력| D[로그인 요청]:::action
-D -->|JWT 발급| E[성격 테스트 시작]:::page
+G --> H[MBTI 결과 계산]
+H --> I[결과 페이지 표시]
 
-E --> F[MBTI 질문 진행]:::action
-F --> G[질문 모두 응답 완료]:::action
+I -->|결과 저장 클릭| J[서버에 저장 요청 (JWT 포함)]
+J --> K[User.personalityJson 업데이트]
+K --> L[저장 완료]
 
-G --> H[MBTI 결과 계산]:::result
-H --> I[결과 페이지 표시]:::page
+L --> M[메인/마이페이지 이동]
 
-I -->|결과 저장 클릭| J[JWT 포함하여 서버 저장 요청]:::action
-J --> K[User.personalityJson 업데이트]:::result
+C -->|로그인 없이 접근| X[권한 없음 → 로그인 이동]
 
-K --> L[저장 완료 메시지]:::result --> M[메인/마이페이지 이동]:::page
-
-C -->|비로그인 상태로 접근| X[권한 없음 → 로그인 이동]:::error
-
-M --> N[내 성향 보기]:::page
-N -->|서버 요청| O[저장된 성향 JSON 반환]:::result
-O --> P[MBTI 결과 화면 표시]:::page
-
+M --> N[내 성향 보기]
+N --> O[서버에서 personalityJson 조회]
+O --> P[저장된 MBTI 결과 표시]
 
 ### 기술 스택
 
