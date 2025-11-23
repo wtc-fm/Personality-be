@@ -32,7 +32,11 @@ class SecurityConfig {
     @Bean
     fun corsFilter(): CorsFilter {
         val config = CorsConfiguration()
-        config.allowedOriginPatterns = listOf("http://localhost:5173")
+        config.allowedOriginPatterns = listOf(
+            "http://localhost:5173",
+            "https://personalityfe.vercel.app",
+            "https://personalityfe-l9zhmfikr-jjaeroongs-projects.vercel.app"
+        )
         config.allowedMethods = listOf("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
         config.allowedHeaders = listOf("*")
         config.allowCredentials = true
