@@ -8,16 +8,17 @@ import com.personalitytest.personalitytest.dto.SignupRequest
 import com.personalitytest.personalitytest.global.error.CustomException
 import com.personalitytest.personalitytest.global.error.ErrorCode
 import com.personalitytest.personalitytest.repository.UserRepository
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
 @Service
 class AuthService(
     private val userRepository: UserRepository,
+    private val encoder: PasswordEncoder,
     private val jwtTokenProvider: JwtTokenProvider
 ) {
-    private val encoder = BCryptPasswordEncoder()
 
-    fun signup(req: SignupRequest) {
+    fun signup(req: SignupRequest):User {
         if (userRepository.existsByEmail(req.email)) {
             throw CustomException(ErrorCode.EMAIL_ALREADY_EXISTS)
         }
@@ -26,7 +27,7 @@ class AuthService(
             email = req.email.trim(),
             password = encoder.encode(req.password.trim())
         )
-        userRepository.save(user)
+        return userRepository.save(user)
     }
 
     fun login(req: LoginRequest): LoginResponse {
